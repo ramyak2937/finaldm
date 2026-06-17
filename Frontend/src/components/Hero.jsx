@@ -24,15 +24,7 @@ export default function Hero() {
             and logs the lead — fully automated, 24 × 7.
           </p>
 
-          <div className="mt-[30px] flex gap-[15px]">
-            <button className="bg-[#ffffff] px-[25px] py-[12px] rounded-[10px] text-black font-[600]">
-              ⚡ See It Live
-            </button>
-
-            <button className="bg-[#ffbe2a] px-[25px] py-[12px] rounded-[10px] text-black font-[600]">
-              📊 View Dashboard
-            </button>
-          </div>
+          
 
           {/* MINI STATS */}
           <div className="mt-[30px] flex gap-[30px]">

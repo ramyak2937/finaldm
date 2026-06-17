@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Workflow from "./components/Workflow";
-import Pricing from "./components/Pricing";
-import Contact from "./components/Contact";
 import Dashboard from "./Pages/Dashboard";
+import Contact from "./components/Contact";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -16,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <div style={{ background: "#020617", minHeight: "100vh" }}>
-
+        <Navbar />
         <Routes>
 
           <Route
@@ -26,15 +25,12 @@ function App() {
                 <Hero />
                 <Features />
                 <Workflow />
-                <Pricing />
-                <Contact />
+                <Contact/>
               </>
             }
           />
 
           <Route path="/features" element={<Features />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
 

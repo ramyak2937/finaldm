@@ -3,41 +3,8 @@ import React from "react";
 const Contact = () => {
   return (
     <div className="min-h-screen bg-[#020617] text-white px-6 py-16">
-      {/* ================= GET STARTED ================= */}
-      <div className="flex flex-col items-center justify-center text-center py-24">
-
-        <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-          START AUTOMATING YOUR <br />
-          <span className="text-[#ffbe2a]">
-            SOCIAL MEDIA LEADS TODAY
-          </span>
-        </h1>
-
-        <p className="text-[#cbd5e1] mt-6 max-w-2xl">
-          Join thousands of creators and businesses capturing leads on
-          autopilot — free to start, no credit card needed.
-        </p>
-
-        <div className="mt-10 flex flex-col md:flex-row gap-4 items-center">
-
-          <input
-            type="email"
-            placeholder="Enter your email address"
-            className="px-6 py-3 w-[320px] rounded-lg bg-[#0f172a] border border-[#1e293b] text-white outline-none"
-          />
-
-          <button className="bg-[#ffbe2a] text-black px-6 py-3 rounded-lg font-semibold hover:opacity-90">
-            ⚡ Launch AutoDM Pro →
-          </button>
-
-        </div>
-
-        <p className="text-[#94a3b8] mt-6 text-sm">
-          ✓ Free plan available • ✓ No credit card • ✓ Setup in 10 minutes
-        </p>
-
-      </div>
-
+    
+      
       {/* ================= TESTIMONIALS ================= */}
       <div className="max-w-6xl mx-auto mb-24">
 
@@ -159,7 +126,7 @@ const Contact = () => {
         href="tel:+919095422237"
         className="hover:text-[#ffbe2a] transition"
       >
-        📞 +91 90954 22237
+        📞 +91 79045 27850
       </a>
     </li>
 

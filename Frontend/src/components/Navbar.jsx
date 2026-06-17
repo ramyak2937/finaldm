@@ -19,8 +19,6 @@ function Navbar() {
       <div className="flex gap-[30px] text-[#cbd5e1]">
         <Link to="/">Home</Link>
         <Link to="/features">Features</Link>
-        <Link to="/pricing">Pricing</Link>
-        <Link to="/contact">Contact</Link>
         <Link to="/Registration">Register</Link>
         <Link to="/dashboard">Dashboard</Link>
         </div>
