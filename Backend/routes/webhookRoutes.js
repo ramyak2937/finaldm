@@ -19,22 +19,32 @@ router.get("/instagram-webhook", (req, res) => {
   return res.sendStatus(403);
 });
 
+// Instagram Comment Webhook
 router.post("/instagram-webhook", async (req, res) => {
   console.log("🔥 WEBHOOK RECEIVED 🔥");
+  console.log("BODY:", JSON.stringify(req.body, null, 2));
 
-  const entry = req.body.entry?.[0];
-  const change = entry?.changes?.[0];
+  try {
+    const entry = req.body.entry?.[0];
+    const change = entry?.changes?.[0];
 
-  if (change?.field === "comments") {
-    const commentText = change.value.text;
+    if (change?.field === "comments") {
+      const commentText = change.value?.text || "";
 
-    console.log("Comment:", commentText);
+      console.log("💬 Comment:", commentText);
 
-    if (commentText.toLowerCase().includes("link")) {
-      console.log("✅ LINK COMMENT DETECTED");
+      if (commentText.toLowerCase().includes("link")) {
+        console.log("✅ LINK COMMENT DETECTED");
+      }
+    } else {
+      console.log("⚠️ Not a comment event");
     }
-  }
 
-  res.status(200).send("EVENT_RECEIVED");
+    res.status(200).send("EVENT_RECEIVED");
+  } catch (error) {
+    console.error("❌ Webhook Error:", error);
+    res.status(500).send("ERROR");
+  }
 });
+
 module.exports = router;
