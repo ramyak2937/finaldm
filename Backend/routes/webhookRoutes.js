@@ -1,3 +1,4 @@
+const InstagramLead = require("../models/InstagramLead");
 const express = require("express");
 const router = express.Router();
 
@@ -34,8 +35,17 @@ router.post("/instagram-webhook", async (req, res) => {
       console.log("💬 Comment:", commentText);
 
       if (commentText.toLowerCase().includes("link")) {
-        console.log("✅ LINK COMMENT DETECTED");
-      }
+  console.log("✅ LINK COMMENT DETECTED");
+
+  await InstagramLead.create({
+    username: change.value?.from?.username,
+    comment: commentText,
+    instagramUserId: change.value?.from?.id,
+    mediaId: change.value?.media?.id,
+  });
+
+  console.log("💾 Lead Saved To MongoDB");
+}
     } else {
       console.log("⚠️ Not a comment event");
     }

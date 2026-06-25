@@ -1,3 +1,4 @@
+const instagramLeadRoutes = require("./routes/instagramLeadRoutes");
 const express = require("express");
 console.log("NEW SERVER FILE LOADED 🚀");
 
@@ -15,7 +16,7 @@ const app = express();
 app.get("/ramya", (req, res) => {
   res.send("Ramya Route Working ✅");
 });
-
+app.use("/api", instagramLeadRoutes);
 app.use(cors());
 app.use(express.json());
 
