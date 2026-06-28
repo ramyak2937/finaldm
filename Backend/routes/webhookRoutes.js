@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const axios = require("axios");
 
 const InstagramLead = require("../models/InstagramLead");
 const sendPrivateReply = require("../services/sendPrivateReply");
@@ -24,25 +25,22 @@ router.get("/instagram-webhook", (req, res) => {
 
 // Instagram Webhook
 router.post("/instagram-webhook", async (req, res) => {
-
   console.log("🔥 WEBHOOK RECEIVED 🔥");
   console.log("BODY:", JSON.stringify(req.body, null, 2));
 
   try {
-
     const entry = req.body.entry?.[0];
     const change = entry?.changes?.[0];
 
     if (change?.field === "comments") {
-
       const commentText = change.value?.text || "";
 
       console.log("💬 Comment:", commentText);
 
       if (commentText.toLowerCase().includes("link")) {
-
         console.log("✅ LINK COMMENT DETECTED");
 
+        // Save to MongoDB
         await InstagramLead.create({
           username: change.value?.from?.username,
           comment: commentText,
@@ -52,27 +50,42 @@ router.post("/instagram-webhook", async (req, res) => {
 
         console.log("💾 Lead Saved To MongoDB");
 
-        // Send Private Reply
-        await sendPrivateReply(change.value.id);
+        // Send data to n8n
+        try {
+          await axios.post(
+            "https://passive-dupe-spectrum.ngrok-free.dev/webhook/instagram-comment",
+            {
+              username: change.value?.from?.username,
+              comment: commentText,
+              instagramUserId: change.value?.from?.id,
+              mediaId: change.value?.media?.id,
+            }
+          );
 
+          console.log("📤 Data Sent To n8n");
+        } catch (err) {
+          console.log("❌ n8n Error");
+          console.log(err.response?.data || err.message);
+        }
+
+        // Send Instagram Private Reply
+        try {
+          await sendPrivateReply(change.value.id);
+          console.log("📩 Private Reply Sent");
+        } catch (err) {
+          console.log("❌ Private Reply Failed");
+          console.log(err.response?.data || err.message);
+        }
       }
-
     } else {
-
       console.log("⚠️ Not a comment event");
-
     }
 
     res.status(200).send("EVENT_RECEIVED");
-
   } catch (error) {
-
     console.error("❌ Webhook Error:", error);
-
     res.status(500).send("ERROR");
-
   }
-
 });
 
 module.exports = router;
