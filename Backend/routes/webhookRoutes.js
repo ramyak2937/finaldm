@@ -69,13 +69,15 @@ router.post("/instagram-webhook", async (req, res) => {
         }
 
         // Send Instagram Private Reply
-        try {
-          await sendPrivateReply(change.value.id);
-          console.log("📩 Private Reply Sent");
-        } catch (err) {
-          console.log("❌ Private Reply Failed");
-          console.log(err.response?.data || err.message);
-        }
+console.log("Comment ID:", change.value.id);
+
+try {
+  await sendPrivateReply(change.value.id);
+  console.log("📩 Private Reply Sent");
+} catch (err) {
+  console.log("❌ Private Reply Failed");
+  console.log(err.response?.data || err.message);
+}
       }
     } else {
       console.log("⚠️ Not a comment event");
