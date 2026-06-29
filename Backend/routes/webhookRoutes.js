@@ -71,6 +71,11 @@ router.post("/instagram-webhook", async (req, res) => {
         // Send Instagram Private Reply
 console.log("Comment ID:", change.value.id);
 
+// Send Instagram Private Reply
+
+console.log("Comment ID:", change.value.id);
+console.log("Instagram User ID:", change.value.from?.id);
+
 try {
   await sendPrivateReply(change.value.id);
   console.log("📩 Private Reply Sent");
