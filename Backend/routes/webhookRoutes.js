@@ -50,23 +50,24 @@ router.post("/instagram-webhook", async (req, res) => {
 
         console.log("💾 Lead Saved To MongoDB");
 
-        // Send data to n8n
-        try {
-          await axios.post(
-            "https://passive-dupe-spectrum.ngrok-free.dev/webhook/instagram-comment",
-            {
-              username: change.value?.from?.username,
-              comment: commentText,
-              instagramUserId: change.value?.from?.id,
-              mediaId: change.value?.media?.id,
-            }
-          );
+        /*
+try {
+  await axios.post(
+    "https://passive-dupe-spectrum.ngrok-free.dev/webhook/instagram-comment",
+    {
+      username: change.value?.from?.username,
+      comment: commentText,
+      instagramUserId: change.value?.from?.id,
+      mediaId: change.value?.media?.id,
+    }
+  );
 
-          console.log("📤 Data Sent To n8n");
-        } catch (err) {
-          console.log("❌ n8n Error");
-          console.log(err.response?.data || err.message);
-        }
+  console.log("📤 Data Sent To n8n");
+} catch (err) {
+  console.log("❌ n8n Error");
+  console.log(err.response?.data || err.message);
+}
+*/
 
         // Send Instagram Private Reply
 console.log("Comment ID:", change.value.id);
