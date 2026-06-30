@@ -15,12 +15,14 @@ router.post("/register", async (req, res) => {
 
     // n8n call (optional)
     try {
-      await axios.post("http://localhost:5678/webhook/register", {
-        name,
-        email,
-        phone,
-      });
-
+      await axios.post(
+  "https://passive-dupe-spectrum.ngrok-free.dev/webhook/instagram-comment",
+  {
+    name,
+    email,
+    phone,
+  }
+);
       console.log("✅ Sent to n8n");
     } catch (err) {
       console.log("⚠️ n8n not running or webhook inactive");

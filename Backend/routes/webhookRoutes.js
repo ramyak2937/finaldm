@@ -77,13 +77,7 @@ console.log("Comment ID:", change.value.id);
 console.log("Comment ID:", change.value.id);
 console.log("Instagram User ID:", change.value.from?.id);
 
-try {
-  await sendPrivateReply(change.value.id);
-  console.log("📩 Private Reply Sent");
-} catch (err) {
-  console.log("❌ Private Reply Failed");
-  console.log(err.response?.data || err.message);
-}
+console.log("Private Reply skipped for demo");
       }
     } else {
       console.log("⚠️ Not a comment event");
